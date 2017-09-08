@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">DefendSafe</string>
     <string name="versionName">版本号：</string>
+    <string name="Settings">设置中心</string>
+    <string name="PhoneBak">手机防盗</string>
+    <string name="SIMGuard">通信卫士</string>
+    <string name="SoftManager">软件管理</string>
+    <string name="ProcessManager">进程管理</string>
+    <string name="MobileCounter">流量统计</string>
+    <string name="MobileSecurity">手机杀毒</string>
+    <string name="MobileCleaner">垃圾清理</string>
+    <string name="AdvencedTools">高级工具</string>
+    <string name="sample_device_admin">超级管理员</string>
+    <string name="sample_device_admin_description">清除数据，一键锁屏，一键卸载</string>
 </resources>

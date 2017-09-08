@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:text="@string/Settings"
+        style="@style/titleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.lenovo.defendsafe.views.SettingsItemView
+        xmlns:safedefender="http://schemas.android.com/apk/res/com.lenovo.defendsafe"
+        android:id="@+id/sivUpdate"
+        safedefender:settingsTitle="自动更新设置"
+        safedefender:settingsDescOff="自动更新已关闭"
+        safedefender:settingsDescOn="自动更新已开启"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.lenovo.defendsafe.views.SettingsItemView
+        xmlns:safedefender="http://schemas.android.com/apk/res/com.lenovo.defendsafe"
+        android:id="@+id/sivPhoneBak"
+        safedefender:settingsTitle="手机防盗设置"
+        safedefender:settingsDescOff="手机防盗已关闭"
+        safedefender:settingsDescOn="手机防盗已开启"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.lenovo.defendsafe.views.SettingsItemView
+        xmlns:safedefender="http://schemas.android.com/apk/res/com.lenovo.defendsafe"
+        android:id="@+id/sivPhoneAddress"
+        safedefender:settingsTitle="电话归属地显示设置"
+        safedefender:settingsDescOff="归属地显示已关闭"
+        safedefender:settingsDescOn="归属地显示已开启"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.lenovo.defendsafe.views.SettingsClickItemView
+        xmlns:safedefender="http://schemas.android.com/apk/res/com.lenovo.defendsafe"
+        android:id="@+id/scivPhoneStyle"
+        safedefender:settingsTitle="设置归属地显示风格"
+        safedefender:settingsDescOn="蓝色"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.lenovo.defendsafe.views.SettingsClickItemView
+        xmlns:safedefender="http://schemas.android.com/apk/res/com.lenovo.defendsafe"
+        android:id="@+id/scivPhonePosition"
+        safedefender:settingsTitle="归属地提示框位置"
+        safedefender:settingsDescOn="设置归属地提示框位置"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

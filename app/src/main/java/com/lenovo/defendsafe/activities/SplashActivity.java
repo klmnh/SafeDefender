@@ -11,29 +11,28 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuBuilder;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.animation.AlphaAnimation;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.lenovo.defendsafe.R;
 import com.lenovo.defendsafe.utils.CommonUtils;
+import com.lenovo.defendsafe.utils.ConstantValue;
+import com.lenovo.defendsafe.utils.SPUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Closeable;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.locks.Lock;
-
-import javax.net.ssl.ExtendedSSLSession;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -60,13 +59,55 @@ public class SplashActivity extends AppCompatActivity {
 
         TextView textView = (TextView) findViewById(R.id.txtVersion);
 
+        InitAnimation();
+
         InitData(textView);
+
+        InitDB();
+    }
+
+    private void InitDB() {
+
+        InputStream is = null;
+        FileOutputStream fos = null;
+        File file = getFilesDir();
+        File fileDB = new File(file, "telocation.db");
+        if (!fileDB.exists()) {
+            try {
+                is = getAssets().open("telocation.db");
+                fos = new FileOutputStream(fileDB);
+                byte[] buffer = new byte[1024];
+                int len = 0;
+                while ((len = is.read(buffer)) != -1) {
+                    fos.write(buffer, 0, len);
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }finally {
+                try {
+                    fos.close();
+                    is.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+
+    private void InitAnimation() {
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        alphaAnimation.setDuration(2000);
+        alphaAnimation.setFillAfter(true);
+        RelativeLayout rl_root = (RelativeLayout) findViewById(R.id.rl_root);
+        rl_root.startAnimation(alphaAnimation);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        switch (requestCode){
+        switch (requestCode) {
             case 1:
                 EnterHomeActivity();
                 break;
@@ -141,7 +182,7 @@ public class SplashActivity extends AppCompatActivity {
 
                             path = Environment.getDownloadCacheDirectory().getAbsolutePath();
                         }
-                        path +=  ("/" + downloadUrl.substring(downloadUrl.lastIndexOf("/") + 1));
+                        path += ("/" + downloadUrl.substring(downloadUrl.lastIndexOf("/") + 1));
                         RandomAccessFile raFile = new RandomAccessFile(path, "rw");
                         raFile.setLength(len);
 
@@ -180,10 +221,14 @@ public class SplashActivity extends AppCompatActivity {
         try {
             packageInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
             textView.setText(textView.getText() + packageInfo.versionName);
-
             mLocalVersionCode = packageInfo.versionCode;
-            //从服务器获取更新信息
-            CheckVersion();
+
+            if (SPUtils.getBoolean(this, ConstantValue.SETTINGS_UPDATE, false)) {
+                //从服务器获取更新信息
+                CheckVersion();
+            } else {
+                handler.sendEmptyMessageDelayed(ENTER_HOME, 2000);
+            }
 
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -198,6 +243,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void run() {
+                long startTime = System.currentTimeMillis();
                 InputStream inputStream = null;
                 Message message = Message.obtain();
                 try {
@@ -236,6 +282,14 @@ public class SplashActivity extends AppCompatActivity {
                 } catch (JSONException e) {
                     message.what = ERROR_JSON;
                 } finally {
+                    long currentTime = System.currentTimeMillis();
+                    if (currentTime - startTime < 2000) {
+                        try {
+                            Thread.sleep(2000 - (currentTime - startTime));
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
                     handler.sendMessage(message);
                     if (inputStream != null) {
                         try {
@@ -315,7 +369,7 @@ public class SplashActivity extends AppCompatActivity {
                     Log.i(TAG, startIndex + "");
                     byte[] buffer = new byte[1024 * 512];
                     int tempLen = 0;
-                    while ((tempLen = is.read(buffer)) != -1){
+                    while ((tempLen = is.read(buffer)) != -1) {
 
                         raFile.write(buffer, 0, tempLen);
                     }
@@ -326,9 +380,8 @@ public class SplashActivity extends AppCompatActivity {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
-            finally {
-                synchronized (DownloadThread.class){
+            } finally {
+                synchronized (DownloadThread.class) {
                     successNum++;
                     if (successNum == threadNum) {
                         runOnUiThread(new Runnable() {

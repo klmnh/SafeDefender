@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#accc"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_phonePositionDrag"
+        android:drawableLeft="@drawable/drag"
+        android:text="双击居中"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_phonePositionTipTop"
+        android:text="选择提示框拖拽到任意位置"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:background="@drawable/bk_phoneposition"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_phonePositionTipBottom"
+        android:text="选择提示框拖拽到任意位置"
+        android:textSize="18sp"
+        android:gravity="center"
+        android:visibility="visible"
+        android:background="@drawable/bk_phoneposition"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

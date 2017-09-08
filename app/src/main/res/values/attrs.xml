@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SettingsItemView">
+        <attr name="settingsTitle" format="string"></attr>
+        <attr name="settingsDescOff" format="string"></attr>
+        <attr name="settingsDescOn" format="string"></attr>
+    </declare-styleable>
+</resources>
