@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/local_popup_bg"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_popWindowUninstall"
+        android:text="卸载"
+        android:drawableTop="@drawable/img1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></TextView>
+
+    <TextView
+        android:id="@+id/tv_popWindowStart"
+        android:text="启动"
+        android:drawableTop="@drawable/img2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></TextView>
+
+    <TextView
+        android:id="@+id/tv_popWindowShare"
+        android:text="分享"
+        android:drawableTop="@drawable/img3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></TextView>
+
+</LinearLayout>

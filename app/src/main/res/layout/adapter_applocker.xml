@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:id="@+id/iv_appLockerIcon"
+        android:background="@mipmap/ic_launcher"
+        android:layout_width="45dp"
+        android:layout_height="45dp" />
+
+    <TextView
+        android:id="@+id/tv_appLockerName"
+        android:text="拦截号码"
+        android:textColor="#000"
+        android:textSize="18sp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/iv_appLockerIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:id="@+id/iv_appLockerLock"
+        android:background="@mipmap/ic_launcher"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

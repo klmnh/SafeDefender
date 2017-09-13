@@ -16,9 +16,6 @@ import com.lenovo.defendsafe.R;
 import com.lenovo.defendsafe.utils.ConstantValue;
 import com.lenovo.defendsafe.utils.SPUtils;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 /**
  * Created by Lenovo on 2017/9/8 008.
  */

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/titleStyle"
+        android:text="进程管理" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_processCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="进程总数"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_memoryInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="剩余/总共"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <ListView
+            android:id="@+id/lv_processMgr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+        <TextView
+            android:id="@+id/tv_processDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ccc"
+            android:textColor="#000"
+            android:textSize="18sp" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_processSelectAll"
+            android:text="全选"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_processUnSelectAll"
+            android:text="反选"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_processClearAll"
+            android:text="一键清理"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_processSetting"
+            android:text="设置"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -24,4 +24,10 @@ public class ConstantValue {
     public static final String SETTINGS_PHONE_Style = "settings_phonestyle";
     public static final String PHONE_POSITION_X = "phonePosition_X";
     public static final String PHONE_POSITION_Y = "phonePosition_Y";
+    public static final String SETTINGS_BLACKNUMBER = "settings_blacknumber";
+    public static final String SETTINGS_PROGRAMLOCKER = "settings_programlocker";
+    public static final String PROCESS_SHOW_SYSTEM = "process_showSystem";
+    public static final String PROCESS_LOCK_CLEAR = "process_lockClear";
+    public static final String PROCESS_HAS_SHORTCUT = "process_hasShortcut";
+    public static final String IS_APP_LOCK = "isAppLock";
 }

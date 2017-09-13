@@ -7,7 +7,9 @@ import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
-import com.lenovo.defendsafe.activities.SettingsActivity;
+import com.lenovo.defendsafe.service.ApplockerService;
+import com.lenovo.defendsafe.service.BlackNumberService;
+import com.lenovo.defendsafe.service.LockScreenClearService;
 import com.lenovo.defendsafe.service.PhoneAddressService;
 import com.lenovo.defendsafe.utils.ConstantValue;
 import com.lenovo.defendsafe.utils.SPUtils;
@@ -41,6 +43,30 @@ public class CheckPhoneBakBroadcastReceiver extends BroadcastReceiver {
             boolean isRunningService1 = ServiceUtils.isRunning(context, PhoneAddressService.class.getName());
             if(!isRunningService1) {
                 Intent intent1 = new Intent(context, PhoneAddressService.class);
+                context.startService(intent1);
+            }
+        }
+
+        if (SPUtils.getBoolean(context, ConstantValue.SETTINGS_BLACKNUMBER, false)) {
+            boolean isRunningService1 = ServiceUtils.isRunning(context, BlackNumberService.class.getName());
+            if(!isRunningService1) {
+                Intent intent1 = new Intent(context, BlackNumberService.class);
+                context.startService(intent1);
+            }
+        }
+
+        if (SPUtils.getBoolean(context, ConstantValue.PROCESS_LOCK_CLEAR, false)) {
+            boolean isRunningService1 = ServiceUtils.isRunning(context, LockScreenClearService.class.getName());
+            if(!isRunningService1) {
+                Intent intent1 = new Intent(context, LockScreenClearService.class);
+                context.startService(intent1);
+            }
+        }
+
+        if (SPUtils.getBoolean(context, ConstantValue.SETTINGS_PROGRAMLOCKER, false)) {
+            boolean isRunningService1 = ServiceUtils.isRunning(context, ApplockerService.class.getName());
+            if(!isRunningService1) {
+                Intent intent1 = new Intent(context, ApplockerService.class);
                 context.startService(intent1);
             }
         }

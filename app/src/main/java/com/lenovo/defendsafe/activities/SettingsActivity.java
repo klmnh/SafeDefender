@@ -1,7 +1,7 @@
 package com.lenovo.defendsafe.activities;
 
-import android.content.ComponentName;
 import android.app.admin.DevicePolicyManager;
+import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,13 +9,14 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.lenovo.defendsafe.R;
 import com.lenovo.defendsafe.broadcastReceiver.MyDeviceAdminReceiver;
+import com.lenovo.defendsafe.service.ApplockerService;
+import com.lenovo.defendsafe.service.BlackNumberService;
 import com.lenovo.defendsafe.service.PhoneAddressService;
 import com.lenovo.defendsafe.utils.CommonUtils;
 import com.lenovo.defendsafe.utils.ConstantValue;
@@ -54,6 +55,10 @@ public class SettingsActivity extends AppCompatActivity {
         InitPhoneStyle();
 
         InitPhonePosition();
+
+        InitBlackNumber();
+
+        InitProgramLocker();
     }
 
     private void InitUpdate() {
@@ -177,8 +182,6 @@ public class SettingsActivity extends AppCompatActivity {
         int phoneStyle = SPUtils.getInt(this, ConstantValue.SETTINGS_PHONE_Style, 0);
         siv_phoneStyle.SetStyleDesc(listStyleDesc[phoneStyle]);
 
-
-
         siv_phoneStyle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -217,6 +220,64 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SettingsActivity.this, PhonePositionActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void InitBlackNumber() {
+        final SettingsItemView siv_BlackNumber = (SettingsItemView) findViewById(R.id.sivBlackNumber);
+        boolean open_update = SPUtils.getBoolean(this, ConstantValue.SETTINGS_BLACKNUMBER, false);
+        boolean isRunningService = ServiceUtils.isRunning(getApplicationContext(), BlackNumberService.class.getName());
+        siv_BlackNumber.setChecked(open_update && isRunningService);
+
+        siv_BlackNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = siv_BlackNumber.isChecked();
+                siv_BlackNumber.setChecked(!isChecked);
+
+                boolean isRunningService1 = ServiceUtils.isRunning(getApplicationContext(), BlackNumberService.class.getName());
+                Intent intent = new Intent(SettingsActivity.this, BlackNumberService.class);
+                if (!isChecked) {
+                    if(!isRunningService1) {
+                        startService(intent);
+                    }
+                } else {
+                    if(isRunningService1) {
+                        stopService(intent);
+                    }
+                }
+
+                SPUtils.putBoolean(getApplicationContext(), ConstantValue.SETTINGS_BLACKNUMBER, !isChecked);
+            }
+        });
+    }
+
+    private void InitProgramLocker() {
+        final SettingsItemView siv_ProgramLocker = (SettingsItemView) findViewById(R.id.sivProgramLocker);
+        boolean open_update = SPUtils.getBoolean(this, ConstantValue.SETTINGS_PROGRAMLOCKER, false);
+        boolean isRunningService1 = ServiceUtils.isRunning(getApplicationContext(), ApplockerService.class.getName());
+        siv_ProgramLocker.setChecked(open_update && isRunningService1);
+
+        siv_ProgramLocker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isChecked = siv_ProgramLocker.isChecked();
+                boolean isRunningService1 = ServiceUtils.isRunning(getApplicationContext(), ApplockerService.class.getName());
+                siv_ProgramLocker.setChecked(!isChecked);
+
+                Intent intent = new Intent(SettingsActivity.this, ApplockerService.class);
+                if (!isChecked) {
+                    if(!isRunningService1) {
+                        startService(intent);
+                    }
+                } else {
+                    if(isRunningService1) {
+                        stopService(intent);
+                    }
+                }
+
+                SPUtils.putBoolean(getApplicationContext(), ConstantValue.SETTINGS_PROGRAMLOCKER, !isChecked);
             }
         });
     }

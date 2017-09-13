@@ -63,18 +63,22 @@ public class SplashActivity extends AppCompatActivity {
 
         InitData(textView);
 
-        InitDB();
+        InitDB("telocation.db");
+
+        InitDB("commonnum.db");
+
+        InitDB("antivirus.db");
     }
 
-    private void InitDB() {
+    private void InitDB(String dbName) {
 
         InputStream is = null;
         FileOutputStream fos = null;
         File file = getFilesDir();
-        File fileDB = new File(file, "telocation.db");
+        File fileDB = new File(file, dbName);
         if (!fileDB.exists()) {
             try {
-                is = getAssets().open("telocation.db");
+                is = getAssets().open(dbName);
                 fos = new FileOutputStream(fileDB);
                 byte[] buffer = new byte[1024];
                 int len = 0;

@@ -3,8 +3,6 @@ package com.lenovo.defendsafe.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.lenovo.defendsafe.activities.SettingsActivity;
-
 /**
  * Created by Lenovo on 2017/9/3 003.
  */

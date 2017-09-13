@@ -86,16 +86,28 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
                 break;
             case SIMGuard:
+                Intent intent2 = new Intent(HomeActivity.this, BlackNumberActivity.class);
+                startActivity(intent2);
                 break;
             case SoftManager:
+                Intent intent3 = new Intent(HomeActivity.this, SoftManagerActivity.class);
+                startActivity(intent3);
                 break;
             case ProcessManager:
+                Intent intent4 = new Intent(HomeActivity.this, ProcessManagerActivity.class);
+                startActivity(intent4);
                 break;
             case MobileCounter:
+                Intent intent7 = new Intent(HomeActivity.this, TrafficActivity.class);
+                startActivity(intent7);
                 break;
             case MobileSecurity:
+                Intent intent5 = new Intent(HomeActivity.this, AnitVirusActivity.class);
+                startActivity(intent5);
                 break;
             case MobileCleaner:
+                Intent intent6 = new Intent(HomeActivity.this, CacheClearActivity.class);
+                startActivity(intent6);
                 break;
             case AdvencedTools:
                 Intent intent1 = new Intent(HomeActivity.this, AdvancedToolsActivity.class);
@@ -217,7 +229,7 @@ public class HomeActivity extends AppCompatActivity implements AdapterView.OnIte
     /**
      * 功能模块对应的九宫格适配器
      */
-    public class MyAdapter extends BaseAdapter {
+    class MyAdapter extends BaseAdapter {
 
         @Override
         public int getCount() {

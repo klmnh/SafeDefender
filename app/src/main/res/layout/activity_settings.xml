@@ -53,4 +53,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <com.lenovo.defendsafe.views.SettingsItemView
+    xmlns:safedefender="http://schemas.android.com/apk/res/com.lenovo.defendsafe"
+    android:id="@+id/sivBlackNumber"
+    safedefender:settingsTitle="黑名单拦截设置"
+    safedefender:settingsDescOff="黑名单拦截已关闭"
+    safedefender:settingsDescOn="黑名单拦截已开启"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+
+    <com.lenovo.defendsafe.views.SettingsItemView
+        xmlns:safedefender="http://schemas.android.com/apk/res/com.lenovo.defendsafe"
+        android:id="@+id/sivProgramLocker"
+        safedefender:settingsTitle="程序锁设置"
+        safedefender:settingsDescOff="程序锁已关闭"
+        safedefender:settingsDescOn="程序锁已开启"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 </LinearLayout>
